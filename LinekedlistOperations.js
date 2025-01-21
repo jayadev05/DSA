@@ -77,9 +77,9 @@ function removeDupicate(head){
   let map = {};
     let current = head;
     while (current) {
-      if (!map[current.data]) map[current.data] = true;
+      if (!map[current.value]) map[current.value] = true;
 
-      if (current.next && map[current.next.data]) {
+      if (current.next && map[current.next.value]) {
         current.next = current.next.next;
       } else {
         current = current.next;
@@ -97,7 +97,7 @@ function removeDupicate(head){
     let current = head;
 
     while (current) {
-      if (current.next && current.data == current.next.data) {
+      if (current.next && current.value == current.next.value) {
         current.next = current.next.next;
       } else {
         current = current.next;
@@ -122,7 +122,7 @@ function removeDupicate(head){
       length = 0;
       while (head) {
         length++;
-        if (length > lastN) sum += head.data;
+        if (length > lastN) sum += head.value;
         head = head.next;
       }
   
@@ -163,7 +163,7 @@ function removeDupicate(head){
 
         while (node) {
           index++;
-          if (index === middleIndex) return node.data;
+          if (index === middleIndex) return node.value;
           node = node.next;
         }
 
@@ -201,36 +201,36 @@ function removeDupicate(head){
     
   // check whether the list is palindrome.
 
-       function isPalindrome(head)
-    {
-       let slow = head;
-    let fast = head;
+      function isPalindrome(head) {
+    if (!head || !head.next) return true; // Single node or empty list is a palindrome.
+
+    // Step 1: Find the middle of the linked list
+    let slow = head, fast = head;
     while (fast && fast.next) {
-      slow = slow.next;
-      fast = fast.next.next;
+        slow = slow.next;
+        fast = fast.next.next;
     }
 
-    // Reverse the second half of the linked list
-    let prev = null;
-    let curr = slow;
-
+    // Step 2: Reverse the second half
+    let prev = null, curr = slow;
     while (curr) {
-      let next = curr.next;
-      curr.next = prev;
-      prev = curr;
-      curr = next;
+        let nextNode = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = nextNode;
+    }
+    let secondHalf = prev; // `prev` is now the head of the reversed second half.
+
+    // Step 3: Compare the two halves
+    let firstHalf = head;
+    while (secondHalf) {
+        if (firstHalf.val !== secondHalf.val) return false;
+        firstHalf = firstHalf.next;
+        secondHalf = secondHalf.next;
     }
 
-    let left = head;
-    let right = prev;
-
-    while(right){
-        if(right.data !== left.data) return false;
-        left = left.next;
-        right = right.next
-    }
-    return true
-    }
+    return true; // All values matched, it's a palindrome.
+}
 
 
 
@@ -260,7 +260,15 @@ class Solution {
     }
      return head
     }
+
+    reverseDLLL(){
+      let temp=null;
+
+      
+    }
   }
+
+  
 
 
 //TODO: delete a node from DLL

@@ -25,6 +25,7 @@ class SinglyLinkedList{
     }
     else {
       this.tail.next=newNode
+      this.tail=newNode
     }
 
     this.length++;
@@ -94,7 +95,7 @@ class SinglyLinkedList{
 
   //get 
   get(index){
-    if(index<0 || index> this.length) return null;
+    if(index<0 || index>= this.length) return null;
 
     let count=0;
     let current=this.head
@@ -127,7 +128,7 @@ class SinglyLinkedList{
   insert(index,val){
     if(index<0 || index>this.length) return null;
     if(index===0) this.unshift(val);
-    if(index===index.length-1) this.push(val);
+    if(index===this.length-1) this.push(val);
 
     let newNode= new Node(val);
     let prev= this.get(index-1);
@@ -149,7 +150,7 @@ class SinglyLinkedList{
   remove(index){
     if(index<0 || index>this.length) return null;
     if(index===0) this.shift();
-    if(index===index.length-1) this.pop();
+    if(index===this.length-1) this.pop();
 
     let prev= this.get(index-1);
     let current= this.get(index);
@@ -168,7 +169,7 @@ class SinglyLinkedList{
     this.head=this.tail
     this.tail=node
 
-    let prev;
+    let prev=null;
     let next=null;
     
     for (let i = 0; i < this.length; i++) {
@@ -203,13 +204,15 @@ class SinglyLinkedList{
 
   largestVal(){
 
+    if (!this.head) return null;
+
     let current=this.head;
 
-    let maxVal=0;
+    let maxVal=current.value || 0;
 
     while(current){
-      if(current.value> max){
-        max=current.value
+      if(current.value> maxVal){
+        maxVal=current.value
       }
 
       current=current.next
@@ -226,12 +229,12 @@ class SinglyLinkedList{
     let map = new Map();
     let current=this.head
 
-    while(current.next){
+    while(current){
       if(map.has(current.value)){
         map.set(current.value,false)
       }
       else {
-        mas.set(current.value,true)
+        map.set(current.value,true)
       }
 
       current= current.next
@@ -252,4 +255,78 @@ class SinglyLinkedList{
 
   }
 
+  display(){
+    if(this.length===0) return [];
+
+    let current=this.head
+    let result=[]
+
+    while(current){
+        result.push(current.value);
+
+        current=current.next
+    }
+
+    return console.log(result.join(' => '))
+  }
+
+
+  findMiddle(){
+    if(!this.head) return null;
+
+   let slow=this.head;
+   let fast=this.head;
+
+    let mid=null;
+
+
+    while(fast && fast.next){
+      slow=slow.next
+      fast=fast.next.next
+    }
+
+    return slow
+  }
+
+  removeMiddle(){
+    if(!this.head) return null;
+
+    let slow=this.head
+    let fast=this.head
+    let midIndex=0;
+
+    while(fast && fast.next){
+      slow=slow.next;
+      midIndex++
+      fast=fast.next.next
+    }
+
+    let mid=this.get(midIndex)
+    let prev= this.get(midIndex-1);
+    prev.next=mid.next;
+
+    this.length--;
+
+    return mid;
+
+  }
+
+  
+
 }
+
+
+
+const list=new SinglyLinkedList();
+
+list.push(1)
+list.push(2)
+list.push(3)
+list.push(4)
+list.push(5)
+list.push(6)
+
+console.log(list.findMiddle().value)
+list.removeMiddle()
+
+list.display()

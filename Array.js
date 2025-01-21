@@ -88,7 +88,7 @@ const maxIncSubbarray = (arr) => {
     }
     else{
       if(i-currentIndex > endIndex-startIndex){
-        maxIndex=currentIndex;
+        startIndex=currentIndex;
         endIndex=i
       }
     }

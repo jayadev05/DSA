@@ -45,6 +45,8 @@ const removeCharRecursively=(str,charToRemove)=>{
 
 }
 
+
+
 //ensure a sentence starts with an uppercase and ends with a period
 
 const ensureFormat=(str)=>{
@@ -94,4 +96,32 @@ return reverseString(str.slice(1))+str[0];
 
 }
 
-console.log(reverseString(str))
+
+function reverseEachWord(str){
+
+  let start=0;
+  let result=''
+
+  for(let i=0;i<str.length;i++){
+    if(str[i]===' ' || str[i]===str.length){
+    
+      for(let j=i-1;j>=start;j--){
+        result+=str[i]
+      }
+
+      if(str[i]!==str.length){
+        result+=' '
+      }
+
+      start=i+1
+    }
+
+
+    return result
+  }
+}
+
+
+
+console.log(reverseWord(str))
+        

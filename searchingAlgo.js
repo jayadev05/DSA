@@ -21,7 +21,7 @@ function binarySearch(arr,target){
     return -1
 }
 
-// binary search sing recursion
+// binary search using recursion
 
 function binaryRecursion(arr,target,mid,low=0,high=arr.length-1){
 
