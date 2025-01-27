@@ -9,7 +9,7 @@ function selectionSort (arr,n){
 
   for (let i=0;i<n-1;i++){
     let min =i
-    for(let j=i;j<n;j++){
+    for(let j=i+1;j<n;j++){
       if(arr[j]<arr[min]){
         min=j
       }
@@ -142,8 +142,6 @@ function partition(arr,low,high){
 
 }
 
-
-
 //merge sort
 
 function mergeSort(arr){
@@ -181,5 +179,6 @@ function merge(arr1,arr2){
 
 
 }
+
 
 console.log(mergeSort(arr))
